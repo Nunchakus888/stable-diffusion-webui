@@ -1,13 +1,33 @@
-<div>
-        <a href="/docs">API</a>
-         • 
-        <a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui">Github</a>
-         • 
-        <a href="https://gradio.app">Gradio</a>
-         • 
-        <a href="/" onclick="javascript:gradioApp().getElementById('settings_restart_gradio').click(); return false">Reload UI</a>
+<div id="ui-footer4iframe">
+    <a href="/docs">API123412341234</a>
+     • 
+    <a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui">Github</a>
+     • 
+    <a href="https://gradio.app">Gradio</a>
+     • 
+    <a href="/" onclick="javascript:gradioApp().getElementById('settings_restart_gradio').click(); return false">Reload
+        UI</a>
+    <script type="text/javascript">
+        document.getElementById('payment-iframe').src = 'http://localhost:3000/payment/iframe?url=' + location.href;
+    </script>
+    <iframe
+            id="payment-iframe"
+            src="http://localhost:3000/payment/iframe"
+            style="
+                position: fixed;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                background: transparent;
+                z-index: 1111;
+            ">
+    </iframe>
+
 </div>
-<br />
+<br/>
 <div class="versions">
-{versions}
+    {versions}
 </div>

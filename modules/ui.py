@@ -1784,7 +1784,7 @@ def versions_html():
         xformers_version = "N/A"
 
     return f"""
-python: <span title="{sys.version}">{python_version}</span>
+python: <span style="position: relative" title="{sys.version}">{python_version}</span>
  • 
 torch: {getattr(torch, '__long_version__',torch.__version__)}
  • 
