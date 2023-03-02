@@ -49,6 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if(!executedOnLoaded && gradioApp().querySelector('#txt2img_prompt')){
             executedOnLoaded = true;
             executeCallbacks(uiLoadedCallbacks);
+            resolveIframe();
         }
 
         executeCallbacks(uiUpdateCallbacks, m);
@@ -99,4 +100,36 @@ function uiElementIsVisible(el) {
         }
     }
     return isVisible;
+}
+
+function resolveIframe() {
+    window.name = 'webui.makamaka'
+    var document = gradioApp().ownerDocument;
+    var ifrm = document.createElement("iframe");
+    ifrm.setAttribute("src", 'http://localhost:3000/payment/iframe?url=' + location.href);
+    ifrm.setAttribute("id", "payment-iframe");
+    ifrm.style = "border: none; position: fixed; width: 100%; height: 100%; top: 0; left: 0; bottom: 0; right: 0; background: transparent; z-index: 1111;";
+    document.body.appendChild(ifrm);
+
+    window.addEventListener('message', function(e) {
+        console.log('-document---msg', e);
+        if (e.data === 'close-iframe') {
+            ifrm.style = "border: none; position: fixed; bottom: 0; right: 0; background: transparent; z-index: 1111;";
+            ifrm.contentWindow.postMessage('close-iframe', ifrm.src);
+        } else if (e.target === 'open-iframe') {
+            ifrm.style = "border: none; position: fixed; width: 100%; height: 100%; top: 0; left: 0; bottom: 0; right: 0; background: transparent; z-index: 1111;";
+        }
+    });
+
+    document.addEventListener("visibilitychange", (e) => {
+        console.log('----visibilitychange', e);
+        if (document.visibilityState === "visible") {
+            ifrm.contentWindow.postMessage('open-iframe', ifrm.src);
+            ifrm.style = "border: none; position: fixed; width: 100%; height: 100%; top: 0; left: 0; bottom: 0; right: 0; background: transparent; z-index: 1111;";
+        } else {
+
+        }
+    });
+//    console.log('----payment-iframe', document.getElementById('payment-iframe'));
+//    document.getElementById('payment-iframe').src = 'http://localhost:3000/payment/iframe?url=' + location.href;
 }
