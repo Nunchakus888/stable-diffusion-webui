@@ -106,7 +106,7 @@ function resolveIframe() {
     window.name = 'webui.makamaka'
     var document = gradioApp().ownerDocument;
     var ifrm = document.createElement("iframe");
-    ifrm.setAttribute("src", 'http://localhost:3000/payment/iframe?url=' + location.href);
+    ifrm.setAttribute("src", 'http://10.151.226.68:3000/iframe?url=' + location.href);
     ifrm.setAttribute("id", "payment-iframe");
     ifrm.style = "border: none; position: fixed; width: 100%; height: 100%; top: 0; left: 0; bottom: 0; right: 0; background: transparent; z-index: 1111;";
     document.body.appendChild(ifrm);
